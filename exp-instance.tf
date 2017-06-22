@@ -1,34 +1,29 @@
 
-
-
-variable "something" {
-  default = "nothing"
+variable "remote_user" {
+  default = "admin"
 }
 
-
 variable "remote_path" {
-  default = "/tmp/git"
+  # default = "${var.remote_user}/git"
+  default = "/home/admin/git"
 }
 
 variable "repo_url" {
   default = "https://github.com/gabreal/refactored-octo-garbanzo.git"
 }
-
-data "template_file" "index" {
-  template = "${file("www/index.html")}"
-
-  vars {
-    # machine_title = "${aws_instance.exp-instance.public_dns}"
-    machine_title = "aws_instance.exp-instance.public_dns"
-  }
+    
+variable "repo_key" {
+  default = "/home/admin/.exp-instance.key"
 }
 
-# resource "null_resource" "local" {
-#   triggers {
-#     template = "${data.template_file.indexhtml.rendered}"
+
+# data "template_file" "index" {
+#   template = "${file("www/index.html")}"
+# 
+#   vars {
+#     machine_title = "${aws_instance.exp-instance.public_dns}"
 #   }
 # }
-
 
 
 
@@ -43,7 +38,7 @@ resource "aws_instance" "exp-instance" {
   connection {
     type = "ssh"
     host = "${aws_instance.exp-instance.public_ip}"
-    user = "admin"
+    user = "${var.remote_user}"
     private_key = "${file("~/.ssh/id_aws")}"
   }
 
@@ -52,14 +47,21 @@ resource "aws_instance" "exp-instance" {
   }
 
 
+  provisioner "file" {
+    source = "${var.repo_keyfile}"
+    destination = "${var.repo_key}"
+  }
+
   provisioner "remote-exec" {
     inline = [
-      "sudo sh -c 'apt-get update && apt-get install -y git lighttpd'",
+      "sudo sh -c 'apt-get update && apt-get install -y git git-crypt lighttpd'",
       "git clone ${var.repo_url} ${var.remote_path}",
+      "cd ${var.remote_path} && git-crypt unlock ${var.repo_key}",
       "sudo sh -c 'sed \"s/%HOSTNAME%/${aws_instance.exp-instance.public_dns}/g\" ${var.remote_path}/www/index.html > /var/www/html/index.html'",
     ]
   }
 
+  
   # known bug in v0.9.8 https://github.com/hashicorp/terraform/issues/15177
   # provisioner "file" {
   #   content = "${data.template_file.index.rendered}"
