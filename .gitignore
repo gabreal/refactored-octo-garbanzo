@@ -1,0 +1,3 @@
+.exp-instance.tf.swp
+terraform.tfstate
+terraform.tfstate.backup
