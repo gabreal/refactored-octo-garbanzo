@@ -16,6 +16,8 @@ variable "repo_key" {
   default = "/home/admin/.exp-instance.key"
 }
 
+# variable "repo_keyfile" {}
+
 
 # data "template_file" "index" {
 #   template = "${file("www/index.html")}"
