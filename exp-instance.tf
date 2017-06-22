@@ -16,7 +16,9 @@ variable "repo_key" {
   default = "/home/admin/.exp-instance.key"
 }
 
+# these are defined in the secret file
 # variable "repo_keyfile" {}
+# variable "passphrase" {}
 
 
 # data "template_file" "index" {
@@ -56,7 +58,7 @@ resource "aws_instance" "exp-instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo sh -c 'apt-get update && apt-get install -y git git-crypt lighttpd'",
+      "sudo sh -c 'apt-get update && apt-get install -y git git-crypt lighttpd jq'",
       "git clone ${var.repo_url} ${var.remote_path}",
       "cd ${var.remote_path} && git-crypt unlock ${var.repo_key}",
       "sudo sh -c 'sed \"s/%HOSTNAME%/${aws_instance.exp-instance.public_dns}/g\" ${var.remote_path}/www/index.html > /var/www/html/index.html'",
