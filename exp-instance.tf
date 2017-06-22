@@ -62,6 +62,7 @@ resource "aws_instance" "exp-instance" {
       "git clone ${var.repo_url} ${var.remote_path}",
       "cd ${var.remote_path} && git-crypt unlock ${var.repo_key}",
       "sudo sh -c 'sed \"s/%HOSTNAME%/${aws_instance.exp-instance.public_dns}/g\" ${var.remote_path}/www/index.html > /var/www/html/index.html'",
+      "chmod 600 ${var.repo_key}"
     ]
   }
 
