@@ -56,7 +56,7 @@ resource "aws_instance" "exp-instance" {
     inline = [
       "sudo sh -c 'apt-get update && apt-get install -y git lighttpd'",
       "git clone ${var.repo_url} ${var.remote_path}",
-      "sudo sh -c 'sed \"s/%HOSTNAME%/${aws_instance.exp-instance.public_dns}/g\" ${var.remote_path}/index.html > /var/www/html/index.html'",
+      "sudo sh -c 'sed \"s/%HOSTNAME%/${aws_instance.exp-instance.public_dns}/g\" ${var.remote_path}/www/index.html > /var/www/html/index.html'",
     ]
   }
 
