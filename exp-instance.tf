@@ -47,7 +47,7 @@ variable "domain" {
 
 
 # data "template_file" "index" {
-#   template = "${file("www/index.html")}"
+#   template = "${file("html/index.html")}"
 # 
 #   vars {
 #     machine_title = "${aws_instance.exp-instance.public_dns}"
@@ -99,7 +99,7 @@ resource "aws_instance" "exp-instance" {
       "sudo chsh -s /bin/zsh root",
       "git clone ${var.repo_url} ${var.remote_path}",
       "cd ${var.remote_path} && git-crypt unlock ${var.repo_key}",
-      "sudo sh -c 'sed \"s/%HOSTNAME%/${aws_instance.exp-instance.public_dns}/g\" ${var.remote_path}/www/index.html > /var/www/html/index.html'",
+      "sudo sh -c 'sed \"s/%HOSTNAME%/${aws_instance.exp-instance.public_dns}/g\" ${var.remote_path}/html/index.html > /var/www/html/index.html'",
       "chmod 600 ${var.repo_key}",
       "sudo mv /tmp/xvfb.service /etc/systemd/system/xvfb.service",
       "systemctl enable --now /etc/systemd/system/xvfb.service",
