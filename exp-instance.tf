@@ -85,7 +85,7 @@ resource "aws_instance" "exp-instance" {
 
   provisioner "file" {
     source = "xvfb.service"
-    destination = "/etc/systemd/system/xvfb.service"
+    destination = "/tmp/xvfb.service"
   }
 
   provisioner "remote-exec" {
@@ -101,6 +101,7 @@ resource "aws_instance" "exp-instance" {
       "cd ${var.remote_path} && git-crypt unlock ${var.repo_key}",
       "sudo sh -c 'sed \"s/%HOSTNAME%/${aws_instance.exp-instance.public_dns}/g\" ${var.remote_path}/www/index.html > /var/www/html/index.html'",
       "chmod 600 ${var.repo_key}",
+      "sudo mv /tmp/xvfb.service /etc/systemd/system/xvfb.service",
       "systemctl enable --now /etc/systemd/system/xvfb.service",
     ]
   }
