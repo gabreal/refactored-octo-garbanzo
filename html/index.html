@@ -11,9 +11,9 @@
 </style>
 
 <article>
-  <h1>Hello <!--#echo var="REMOTE_HOST">.</h1>
+  <h1>Hello <!--#echo var="REMOTE_HOST" default="World" -->.</h1>
   <div>
-    <p>It's me <!--#echo var="HTTP_HOST"></p>
+    <p>It's me <!--#echo var="HTTP_HOST" --></p>
   </div>
 </article>
 <article>
