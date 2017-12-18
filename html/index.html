@@ -7,19 +7,90 @@
   article { display: block; text-align: left; width: 650px; margin: 0 auto; }
   a { color: #dc8100; text-decoration: none; }
   a:hover { color: #333; text-decoration: none; }
+  table { font-size: 50%; }
 </style>
 
 <article>
-    <h1>Hello world.</h1>
+  <h1>Hello <!--#echo var="REMOTE_HOST" default="World">.</h1>
     <div>
-        <p>It's me %HOSTNAME%</p>
+      <p>It's me <!--#echo var="HTTP_HOST" default="unknown"></p>
     </div>
-
-    <p>
-    	<!--#printenv -->
-	<!--#echo var="REMOTE_ADDR" -->
-	<!--#echo var="HTTP_USER_AGENT" -->
-	<!--#echo var="DATE_LOCAL" -->
-	<!--#echo var="DATE_GMT" -->
-    </p>
 </article>
+<article>
+  <!-- http://fortboise.org/useful/ssi-manual.html -->
+  <table>
+    <tr>
+      <td>
+        HTTP_HOST
+      </td>
+      <td>
+  	    <!--#echo var="HTTP_HOST" -->
+      </td>
+    </tr>
+    <tr>
+      <td>
+        HTTP_USER_AGENT
+      </td>
+      <td>
+      	<!--#echo var="HTTP_USER_AGENT" -->
+      </td>
+    </tr>
+    <tr>
+      <td>
+        QUERY_STRING
+      </td>
+      <td>
+      	<!--#echo var="QUERY_STRING" -->
+      </td>
+    </tr>
+    <tr>
+      <td>
+        REQUEST_METHOD
+      </td>
+      <td>
+  	    <!--#echo var="REQUEST_METHOD" -->
+      </td>
+    </tr>
+    <tr>
+      <td>
+        DATE_GMT
+      </td>
+      <td>
+        <!--#echo var="DATE_GMT" -->
+      </td>
+    </tr>
+    <tr>
+      <td>
+        REMOTE_ADDR
+      </td>
+      <td>
+  	    <!--#echo var="REMOTE_ADDR" -->
+      </td>
+    </tr>
+    <tr>
+      <td>
+        REMOTE_HOST
+      </td>
+      <td>
+  	    <!--#echo var="REMOTE_HOST" -->
+      </td>
+    </tr>
+    <tr>
+      <td>
+        REMOTE_PORT
+      </td>
+      <td>
+  	    <!--#echo var="REMOTE_PORT" -->
+      </td>
+    </tr>
+    <tr>
+      <td>
+        SERVER_PROTOCOL
+      </td>
+      <td>
+  	    <!--#echo var="SERVER_PROTOCOL" -->
+      </td>
+    </tr>
+  </table>
+</article>
+<!-- vim: set sw=2 ts=2 sts=2 expandtab : >
