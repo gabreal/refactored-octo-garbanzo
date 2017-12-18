@@ -20,7 +20,7 @@
 <article>
   <!-- http://fortboise.org/useful/ssi-manual.html -->
   <table>
-    <tr>
+    <tr title="The host being addressed in this request, which may be the main host or a virtual host, either as a fully-qualified domain name or an IP address">
       <td>
         HTTP_HOST
       </td>
@@ -28,7 +28,7 @@
   	    <!--#echo var="HTTP_HOST" -->
       </td>
     </tr>
-    <tr>
+    <tr title="The name, version number, and platform of the client software">
       <td>
         HTTP_USER_AGENT
       </td>
@@ -36,7 +36,7 @@
       	<!--#echo var="HTTP_USER_AGENT" -->
       </td>
     </tr>
-    <tr>
+    <tr title="HTTP referer header field that identifies the address of the  webpage that linked to this resource">
       <td>
         HTTP_REFERER
       </td>
@@ -44,7 +44,7 @@
   	    <!--#echo var="HTTP_REFERER" -->
       </td>
     </tr>
-    <tr>
+    <tr title="The query-string for this transaction, embedded in the requested URL">
       <td>
         QUERY_STRING
       </td>
@@ -68,7 +68,7 @@
         <!--#echo var="DATE_GMT" -->
       </td>
     </tr>
-    <tr>
+    <tr title="The IP number of the client host">
       <td>
         REMOTE_ADDR
       </td>
@@ -76,7 +76,7 @@
   	    <!--#echo var="REMOTE_ADDR" -->
       </td>
     </tr>
-    <tr>
+    <tr title="The hostname or IP number of the client host or proxy server that originated the request">
       <td>
         REMOTE_HOST
       </td>
@@ -84,7 +84,7 @@
   	    <!--#echo var="REMOTE_HOST" -->
       </td>
     </tr>
-    <tr>
+    <tr title="The client-side port number that originated the request">
       <td>
         REMOTE_PORT
       </td>
@@ -92,7 +92,7 @@
   	    <!--#echo var="REMOTE_PORT" -->
       </td>
     </tr>
-    <tr>
+    <tr title="The protocol and version number used to send the request, useful to ensure compatibility with the client. Typically, HTTP/1.1">
       <td>
         SERVER_PROTOCOL
       </td>
